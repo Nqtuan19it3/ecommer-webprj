@@ -1,44 +1,31 @@
 // import p1 from './images/p1.jpg';
-import data from './data';
-function App() {
-  return (
-    <div className="grid-container">
-       <header className="row">
-                <div>
-                    <a className="brand" href="index.html">Ten Wbsite</a>
-                </div>
-                <div>
-                    <a href="/giohang">Gio hang</a>
-                    <a href="/dangnhap">Dang nhap</a>
-                </div>
-        </header>
-        <main>
-          <div className="row center">
-            {
-              data.products.map((product) => 
-                (
-                  <div key={product._id} className="card">
-              <a href={`/product/${product._id}`}><img className="medium" src={product.image} alt={product.name}/></a>
-                <div className="card-body">
-                <a href={`/product/${product._id}`}> <h2>{product.name}</h2> </a>
-                  <div className="rating">
-                    <span> <i className="fas fa-star"></i> </span>
-                    <span> <i className="fas fa-star"></i> </span>
-                    <span> <i className="fas fa-star"></i> </span>
-                    <span> <i className="fas fa-star"></i> </span>
-                    <span> <i className="fas fa-star"></i> </span>
-                  </div>
-                    <div className="price"> {product.price} VNĐ</div>
-                  </div>
-                </div>
-                )
-                )
-            }
-            
-          </div>
-        </main>
-    </div>
-  );
-}
+import { BrowserRouter, Route} from "react-router-dom";
+import ProductScreen from "./screens/ProductScreen";
+import HomeScreen from "./screens/HomeScreen";
 
+function App() {
+    return (
+        //react-router-dom 
+        //<BrowserRouter> sử dụng các đường dẫn URL thông thường. 
+        //khi người dùng truy cập theo một URL trên trình duyệt, một Component tương ứng sẽ được render trên giao diện.
+        <BrowserRouter>
+        <div className="grid-container">
+            <header className="row">
+                <div>
+                    <a className="brand" href="/">Ten Website</a>
+                </div>
+                <div>
+                    <a href="/cart">Giỏ hàng</a>
+                    <a href="/signin">Đăng nhập</a>
+                </div>
+            </header>
+            <main>
+                <Route path="/product/:id" component={ProductScreen}></Route>
+                <Route path="/" component={HomeScreen} exact></Route>
+            </main>
+            <footer className="row center">Copyright © 2017-2021 - Trường Đại học Công nghệ Thông tin & Truyền Thông Việt - Hàn, Đại học Đà Nẵng</footer>
+        </div>
+        </BrowserRouter>
+    )
+}
 export default App;
